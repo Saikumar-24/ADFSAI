@@ -1,0 +1,48 @@
+{
+	"name": "Employee1_Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABS_Sai",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Employee3.csv",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "empid",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "gender",
+				"type": "String"
+			},
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "salary",
+				"type": "String"
+			},
+			{
+				"name": "department",
+				"type": "String"
+			}
+		]
+	}
+}

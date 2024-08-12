@@ -1,0 +1,54 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Employee1_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "Employees"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Emp_Output_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filterbydep"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     parameter1 as string (department == $depname)",
+				"}",
+				"source(output(",
+				"          empid as string,",
+				"          name as string,",
+				"          gender as string,",
+				"          country as string,",
+				"          salary as string,",
+				"          department as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Employees",
+				"Employees filter(department == 'IT') ~> filterbydep",
+				"filterbydep sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['empBydep.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
