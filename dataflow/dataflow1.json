@@ -27,9 +27,6 @@
 				}
 			],
 			"scriptLines": [
-				"parameters{",
-				"     parameter1 as string (department == $depname)",
-				"}",
 				"source(output(",
 				"          empid as string,",
 				"          name as string,",
