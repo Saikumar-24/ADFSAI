@@ -1,0 +1,67 @@
+{
+	"name": "stringifydataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Emp_json_input",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Output_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "LS_AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "stringify1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          name as string,",
+				"          skills as string[],",
+				"          contact as (mobile as string, landline as string)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 stringify(contactstringify = contact ? string,",
+				"     format: 'json') ~> stringify1",
+				"stringify1 derive(contactstringify = toString(contactstringify)) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          empid as string,",
+				"          name as string,",
+				"          country as string,",
+				"          department as string",
+				"     ),",
+				"     partitionFileNames:['Stringify.json'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          name",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
