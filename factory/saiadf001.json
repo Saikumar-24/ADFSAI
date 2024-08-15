@@ -1,0 +1,9 @@
+{
+	"name": "saiadf001",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "eastus"
+}
