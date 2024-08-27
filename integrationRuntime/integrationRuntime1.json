@@ -1,0 +1,12 @@
+{
+	"name": "integrationRuntime1",
+	"properties": {
+		"type": "SelfHosted",
+		"typeProperties": {
+			"linkedInfo": {
+				"resourceId": "/subscriptions/7b57b7d4-87de-48f7-a542-92dc9afdff2c/resourcegroups/Sai-Resource-Group-01/providers/Microsoft.DataFactory/factories/saiadf001/integrationruntimes/IRself",
+				"authorizationType": "Rbac"
+			}
+		}
+	}
+}
