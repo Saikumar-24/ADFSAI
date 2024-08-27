@@ -1,0 +1,6 @@
+{
+	"name": "IRself",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
